@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7aaa499b_2597f491",
+        "filename": "openstack-heat-ui.spec",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 237
+      },
+      "writtenOn": "2018-02-23T13:34:37Z",
+      "side": 1,
+      "message": "I think this should be pypi_name?",
+      "revId": "3f2c3df7901c92c5e5f3effab85a1fdfc629bd6d",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
