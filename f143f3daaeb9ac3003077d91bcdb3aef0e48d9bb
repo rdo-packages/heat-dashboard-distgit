@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7aaa499b_4272f6e6",
+        "filename": "openstack-heat-ui.spec",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 113
+      },
+      "writtenOn": "2018-02-23T09:24:48Z",
+      "side": 1,
+      "message": "I can\u0027t find ddt or selenium in the project\u0027s test-requirements.txt file. Where are they required?",
+      "range": {
+        "startLine": 26,
+        "startChar": 21,
+        "endLine": 26,
+        "endChar": 23
+      },
+      "revId": "f143f3daaeb9ac3003077d91bcdb3aef0e48d9bb",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
