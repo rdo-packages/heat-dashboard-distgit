@@ -7,8 +7,8 @@
 %bcond_with tests
 
 Name:           openstack-%{openstack_name}
-Version:        XXX
-Release:        XXX
+Version:        1.0.2
+Release:        1%{?dist}
 Summary:        OpenStack Heat Dashboard for Horizon
 
 License:        ASL 2.0
@@ -106,3 +106,6 @@ rm -f %{buildroot}%{python2_sitelib}/heat_dashboard/locale/*pot
 %license LICENSE
 
 %changelog
+* Mon Feb 26 2018 RDO <dev@lists.rdoproject.org> 1.0.2-1
+- Update to 1.0.2
+
