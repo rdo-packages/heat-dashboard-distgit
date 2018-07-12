@@ -106,3 +106,4 @@ rm -f %{buildroot}%{python2_sitelib}/heat_dashboard/locale/*pot
 %license LICENSE
 
 %changelog
+
