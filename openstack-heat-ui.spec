@@ -37,6 +37,11 @@ BuildRequires:  python2-django
 BuildRequires:  gettext
 
 Requires:       openstack-dashboard
+Requires:       python2-XStatic-Angular-UUID
+Requires:       python2-XStatic-Angular-Vis
+Requires:       python2-XStatic-FileSaver
+Requires:       python2-XStatic-Json2yaml
+Requires:       python2-XStatic-JS-Yaml
 Requires:       python2-pbr >= 2.0.0
 Requires:       python2-heatclient >= 1.10.0
 
