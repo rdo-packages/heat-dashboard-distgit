@@ -90,7 +90,7 @@ rm -rf doc/build/html/.{doctrees,buildinfo}
 mkdir -p %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled
 for f in heat_dashboard/enabled/_16*.py*; do
   filename=`basename $f`
-  install -p -D -m 640 heat_dashboard/enabled/${filename} %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/$(filename)
+  install -p -D -m 644 heat_dashboard/enabled/${filename} %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/$(filename)
 done
 
 # Remove .po and .pot (they are not required)
