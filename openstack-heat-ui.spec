@@ -11,6 +11,8 @@
 # End of macros for py2/py3 compatibility
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 
+%global with_doc 1
+
 %global pypi_name heat-dashboard
 %global openstack_name heat-ui
 
@@ -34,11 +36,8 @@ BuildRequires:  python%{pyver}-setuptools
 BuildRequires:  python%{pyver}-testrepository
 BuildRequires:  python%{pyver}-testscenarios
 BuildRequires:  python%{pyver}-testtools
-BuildRequires:  python%{pyver}-oslo-sphinx
 BuildRequires:  python%{pyver}-pbr
-BuildRequires:  python%{pyver}-openstackdocstheme
 BuildRequires:  python%{pyver}-subunit
-BuildRequires:  python%{pyver}-sphinx
 BuildRequires:  python%{pyver}-oslotest
 BuildRequires:  openstack-macros
 # Required to compile i18n messages
@@ -58,13 +57,18 @@ Requires:       python%{pyver}-heatclient >= 1.10.0
 Heat Dashboard is an extension for OpenStack Dashboard that provides a UI
 for Heat.
 
+%if 0%{?with_doc}
 # Documentation package
 %package -n python%{pyver}-%{openstack_name}-doc
 Summary:        Documentation for OpenStack Heat Dashboard for Horizon
 %{?python_provide:%python_provide python%{pyver}-%{openstack_name}-doc}
+BuildRequires:  python%{pyver}-oslo-sphinx
+BuildRequires:  python%{pyver}-openstackdocstheme
+BuildRequires:  python%{pyver}-sphinx
 
 %description -n python%{pyver}-%{openstack_name}-doc
 Documentation for Heat Dashboard
+%endif
 
 %prep
 %autosetup -n %{pypi_name}-%{upstream_version} -S git
@@ -78,10 +82,12 @@ pushd build/lib/heat_dashboard
 django-admin compilemessages
 popd
 
+%if 0%{?with_doc}
 # Build html documentation
 %{pyver_bin} setup.py build_sphinx -b html
 # Remove the sphinx-build-%{pyver} leftovers
 rm -rf doc/build/html/.{doctrees,buildinfo}
+%endif
 
 %install
 %{pyver_install}
@@ -116,9 +122,11 @@ rm -f %{buildroot}%{pyver_sitelib}/heat_dashboard/locale/*pot
 %{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/_1640_project_template_versions_panel.py*
 %{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/_1650_project_template_generator_panel.py*
 
+%if 0%{?with_doc}
 %files -n python%{pyver}-%{openstack_name}-doc
 %doc doc/build/html
 %license LICENSE
+%endif
 
 %changelog
 
