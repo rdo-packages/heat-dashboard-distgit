@@ -20,8 +20,8 @@
 %bcond_with tests
 
 Name:           openstack-%{openstack_name}
-Version:        XXX
-Release:        XXX
+Version:        1.5.0
+Release:        1%{?dist}
 Summary:        OpenStack Heat Dashboard for Horizon
 
 License:        ASL 2.0
@@ -129,4 +129,7 @@ rm -f %{buildroot}%{pyver_sitelib}/heat_dashboard/locale/*pot
 %endif
 
 %changelog
+* Fri Mar 22 2019 RDO <dev@lists.rdoproject.org> 1.5.0-1
+- Update to 1.5.0
+
 
