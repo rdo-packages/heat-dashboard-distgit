@@ -130,3 +130,4 @@ rm -f %{buildroot}%{pyver_sitelib}/heat_dashboard/locale/*pot
 
 %changelog
 
+# REMOVEME: error caused by commit http://git.openstack.org/cgit/openstack/heat-dashboard/commit/?id=de7f249adba8df5338872b9bbb03934bc8e21a7d
