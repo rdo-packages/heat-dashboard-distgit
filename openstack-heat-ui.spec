@@ -62,7 +62,6 @@ for Heat.
 %package -n python%{pyver}-%{openstack_name}-doc
 Summary:        Documentation for OpenStack Heat Dashboard for Horizon
 %{?python_provide:%python_provide python%{pyver}-%{openstack_name}-doc}
-BuildRequires:  python%{pyver}-oslo-sphinx
 BuildRequires:  python%{pyver}-openstackdocstheme
 BuildRequires:  python%{pyver}-sphinx
 
