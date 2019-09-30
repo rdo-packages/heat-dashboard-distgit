@@ -1,3 +1,4 @@
+%global milestone .0rc1
 # Macros for py2/py3 compatibility
 %if 0%{?fedora} || 0%{?rhel} > 7
 %global pyver %{python3_pkgversion}
@@ -20,13 +21,17 @@
 %bcond_with tests
 
 Name:           openstack-%{openstack_name}
-Version:        XXX
-Release:        XXX
+Version:        2.0.0
+Release:        0.1%{?milestone}%{?dist}
 Summary:        OpenStack Heat Dashboard for Horizon
 
 License:        ASL 2.0
 URL:            https://launchpad.net/heat-dashboard
 Source0:        https://tarballs.openstack.org/%{pypi_name}/%{pypi_name}-%{upstream_version}.tar.gz
+
+#
+# patches_base=2.0.0.0rc1
+#
 
 BuildArch:      noarch
 
@@ -128,4 +133,7 @@ rm -f %{buildroot}%{pyver_sitelib}/heat_dashboard/locale/*pot
 %endif
 
 %changelog
+* Mon Sep 30 2019 RDO <dev@lists.rdoproject.org> 2.0.0-0.1.0rc1
+- Update to 2.0.0.0rc1
+
 
