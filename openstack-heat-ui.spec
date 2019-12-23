@@ -64,6 +64,7 @@ Summary:        Documentation for OpenStack Heat Dashboard for Horizon
 %{?python_provide:%python_provide python%{pyver}-%{openstack_name}-doc}
 BuildRequires:  python%{pyver}-openstackdocstheme
 BuildRequires:  python%{pyver}-sphinx
+BuildRequires:  python%{pyver}-sphinxcontrib-rsvgconverter
 
 %description -n python%{pyver}-%{openstack_name}-doc
 Documentation for Heat Dashboard
