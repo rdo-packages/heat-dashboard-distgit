@@ -129,4 +129,3 @@ rm -f %{buildroot}%{pyver_sitelib}/heat_dashboard/locale/*pot
 %endif
 
 %changelog
-
