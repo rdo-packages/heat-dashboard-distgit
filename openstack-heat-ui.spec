@@ -7,7 +7,7 @@
 %bcond_with tests
 
 Name:           openstack-%{openstack_name}
-Version:        1.4.0
+Version:        1.4.2
 Release:        1%{?dist}
 Summary:        OpenStack Heat Dashboard for Horizon
 
@@ -111,6 +111,9 @@ rm -f %{buildroot}%{python2_sitelib}/heat_dashboard/locale/*pot
 %license LICENSE
 
 %changelog
+* Thu Apr 02 2020 RDO <dev@lists.rdoproject.org> 1.4.2-1
+- Update to 1.4.2
+
 * Thu Aug 23 2018 RDO <dev@lists.rdoproject.org> 1.4.0-1
 - Update to 1.4.0
 
