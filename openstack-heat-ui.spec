@@ -84,7 +84,7 @@ popd
 
 %if 0%{?with_doc}
 # Build html documentation
-%{pyver_bin} setup.py build_sphinx -b html
+sphinx-build -W -b html doc/source doc/build/html
 # Remove the sphinx-build-%{pyver} leftovers
 rm -rf doc/build/html/.{doctrees,buildinfo}
 %endif
