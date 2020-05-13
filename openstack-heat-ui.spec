@@ -1,4 +1,3 @@
-%global milestone .0rc1
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 
 %global with_doc 1
@@ -11,15 +10,13 @@
 
 Name:           openstack-%{openstack_name}
 Version:        3.0.0
-Release:        0.1%{?milestone}%{?dist}
+Release:        1%{?dist}
 Summary:        OpenStack Heat Dashboard for Horizon
 
 License:        ASL 2.0
 URL:            https://launchpad.net/heat-dashboard
 Source0:        https://tarballs.openstack.org/%{pypi_name}/%{pypi_name}-%{upstream_version}.tar.gz
 
-#
-# patches_base=3.0.0.0rc1
 #
 
 BuildArch:      noarch
@@ -123,6 +120,9 @@ rm -f %{buildroot}%{python3_sitelib}/heat_dashboard/locale/*pot
 %endif
 
 %changelog
+* Wed May 13 2020 RDO <dev@lists.rdoproject.org> 3.0.0-1
+- Update to 3.0.0
+
 * Wed Apr 29 2020 RDO <dev@lists.rdoproject.org> 3.0.0-0.1.0rc1
 - Update to 3.0.0.0rc1
 
