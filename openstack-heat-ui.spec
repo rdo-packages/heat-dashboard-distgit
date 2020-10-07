@@ -9,7 +9,7 @@
 %bcond_with tests
 
 Name:           openstack-%{openstack_name}
-Version:        3.0.0
+Version:        3.0.1
 Release:        1%{?dist}
 Summary:        OpenStack Heat Dashboard for Horizon
 
@@ -120,6 +120,9 @@ rm -f %{buildroot}%{python3_sitelib}/heat_dashboard/locale/*pot
 %endif
 
 %changelog
+* Wed Oct 07 2020 RDO <dev@lists.rdoproject.org> 3.0.1-1
+- Update to 3.0.1
+
 * Wed May 13 2020 RDO <dev@lists.rdoproject.org> 3.0.0-1
 - Update to 3.0.0
 
