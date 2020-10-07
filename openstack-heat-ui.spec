@@ -20,7 +20,7 @@
 %bcond_with tests
 
 Name:           openstack-%{openstack_name}
-Version:        1.5.0
+Version:        1.5.1
 Release:        1%{?dist}
 Summary:        OpenStack Heat Dashboard for Horizon
 
@@ -129,6 +129,9 @@ rm -f %{buildroot}%{pyver_sitelib}/heat_dashboard/locale/*pot
 %endif
 
 %changelog
+* Wed Oct 07 2020 RDO <dev@lists.rdoproject.org> 1.5.1-1
+- Update to 1.5.1
+
 * Fri Mar 22 2019 RDO <dev@lists.rdoproject.org> 1.5.0-1
 - Update to 1.5.0
 
