@@ -102,6 +102,7 @@ mkdir -p %{buildroot}%{_sysconfdir}/openstack-dashboard/enabled/
 mkdir -p %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled
 mkdir -p %{buildroot}%{_sysconfdir}/openstack-dashboard/local_settings.d
 mkdir -p %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/local_settings.d
+mkdir -p %{buildroot}%{_sysconfdir}/openstack-dashboard/default_policies
 
 for f in heat_dashboard/enabled/_16*.py*; do
   filename=`basename $f`
@@ -128,6 +129,9 @@ done
       %{buildroot}%{_sysconfdir}/openstack-dashboard/local_settings.d/${filename}
   done
 %endif
+
+mv heat_dashboard/conf/heat_policy.yaml %{buildroot}%{_sysconfdir}/openstack-dashboard
+mv heat_dashboard/conf/default_policies/heat.yaml %{buildroot}%{_sysconfdir}/openstack-dashboard/default_policies/
 
 # Remove .po and .pot (they are not required)
 rm -f %{buildroot}%{python3_sitelib}/heat_dashboard/locale/*/LC_*/django*.po
