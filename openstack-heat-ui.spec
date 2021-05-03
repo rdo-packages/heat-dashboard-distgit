@@ -100,6 +100,8 @@ rm -rf doc/build/html/.{doctrees,buildinfo}
 # Move config to horizon
 mkdir -p %{buildroot}%{_sysconfdir}/openstack-dashboard/enabled/
 mkdir -p %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled
+mkdir -p %{buildroot}%{_sysconfdir}/openstack-dashboard/local_settings.d
+mkdir -p %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/local_settings.d
 
 for f in heat_dashboard/enabled/_16*.py*; do
   filename=`basename $f`
@@ -111,6 +113,19 @@ done
     filename=`basename $f`
     ln -s %{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/${filename} \
       %{buildroot}%{_sysconfdir}/openstack-dashboard/enabled/${filename}
+  done
+%endif
+
+for f in heat_dashboard/local_settings.d/_16*.py*; do
+  filename=`basename $f`
+  indysll -p -D -m 644 heat_dashboard/local_settings.d/${filename} %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/local_settings.d/${filename}
+done
+
+%if 0%{?rhosp} == 0
+  for f in %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/local_settings.d/_16*.py*; do
+    filename=`basename $f`
+    ln -s %{_datadir}/openstack-dashboard/openstack_dashboard/local/local_settings.d/${filename} \
+      %{buildroot}%{_sysconfdir}/openstack-dashboard/local_settings.d/${filename}
   done
 %endif
 
@@ -132,9 +147,11 @@ rm -f %{buildroot}%{python3_sitelib}/heat_dashboard/locale/*pot
 %{python3_sitelib}/heat_dashboard
 %{python3_sitelib}/*.egg-info
 %{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/_16*.py*
+%{_datadir}/openstack-dashboard/openstack_dashboard/local/local_settings.d/_16*.py*
 
 %if 0%{?rhosp} == 0
   %{_sysconfdir}/openstack-dashboard/enabled/_16*.py*
+  %{_sysconfdir}/openstack-dashboard/local_settings.d/_16*.py*
 %endif
 
 %if 0%{?with_doc}
