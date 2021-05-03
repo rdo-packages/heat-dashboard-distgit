@@ -99,6 +99,8 @@ rm -rf doc/build/html/.{doctrees,buildinfo}
 
 # Move config to horizon
 install -p -D -m 644 heat_dashboard/local_settings.d/_1699_orchestration_settings.py %{buildroot}%{_sysconfdir}/openstack-dashboard/openstack_dashboard/local_settings.d
+install -p -D -m 644 heat_dashboard/conf/heat_policy.yaml %{buildroot}%{_sysconfdir}/openstack-dashboard/openstack_dashboard/heat_policy.yaml
+install -p -D -m 644 heat_dashboard/conf/default_policies/heat.yaml %{buildroot}%{_sysconfdir}/openstack-dashboard/openstack_dashboard/default_policies/heat.yaml
 
 mkdir -p %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled
 for f in heat_dashboard/enabled/_16*.py*; do
@@ -124,6 +126,8 @@ rm -f %{buildroot}%{python3_sitelib}/heat_dashboard/locale/*pot
 %{python3_sitelib}/heat_dashboard
 %{python3_sitelib}/*.egg-info
 %{_sysconfdir}/openstack-dashboard/openstack_dashboard/local_settings.d/_1699_orchestration_settings.py
+%{_sysconfdir}/openstack-dashboard/openstack_dashboard/conf/heat_policy.yaml
+%{_sysconfdir}/openstack-dashboard/openstack_dashboard/default_policies/heat.yaml
 %{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/_1610_project_orchestration_panel.py*
 %{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/_1620_project_stacks_panel.py*
 %{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/_1630_project_resource_types_panel.py*
