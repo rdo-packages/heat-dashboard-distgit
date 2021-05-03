@@ -98,6 +98,8 @@ rm -rf doc/build/html/.{doctrees,buildinfo}
 %{py3_install}
 
 # Move config to horizon
+install -p -D -m 644 heat_dashboard/local_settings.d/_1699_orchestration_settings.py %{buildroot}%{_sysconfdir}/openstack-dashboard/openstack_dashboard/local_settings.d/_1699_orchestration_settings.py
+
 mkdir -p %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled
 for f in heat_dashboard/enabled/_16*.py*; do
   filename=`basename $f`
@@ -119,6 +121,7 @@ rm -f %{buildroot}%{python3_sitelib}/heat_dashboard/locale/*pot
 %files -f django.lang
 %doc README.rst
 %license LICENSE
+%config(noreplace) %attr(0640, root, apache) %{_sysconfdir}/openstack-dashboard/openstack_dashboard/local_settings.d/_1699_orchestration_settings.py
 %{python3_sitelib}/heat_dashboard
 %{python3_sitelib}/*.egg-info
 %{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/_1610_project_orchestration_panel.py*
