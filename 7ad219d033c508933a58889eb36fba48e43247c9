@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "67621de2_376e2809",
+        "filename": "openstack-heat-ui.spec",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2021-07-20T08:55:43Z",
+      "side": 1,
+      "message": "openstack-dashboard vs heat-dashboard in dir name\n\n\n2021-07-20 07:45:10.977134 | rdo-centos-stream | 2021-07-20 07:45:10,977 INFO:dlrn-build-mock:DEBUG:     File not found: /builddir/build/BUILDROOT/openstack-heat-ui-5.1.0-0.20210720074252.1fbbf77.el8.x86_64/etc/openstack-dashboard/openstack_dashboard/local_settings.d/_1699_orchestration_settings.py",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 3
+      },
+      "revId": "7ad219d033c508933a58889eb36fba48e43247c9",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": true
+    }
+  ]
+}
