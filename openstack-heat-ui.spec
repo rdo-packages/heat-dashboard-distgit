@@ -98,11 +98,21 @@ rm -rf doc/build/html/.{doctrees,buildinfo}
 %{py3_install}
 
 # Move config to horizon
+mkdir -p %{buildroot}%{_sysconfdir}/openstack-dashboard/enabled/
 mkdir -p %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled
+
 for f in heat_dashboard/enabled/_16*.py*; do
   filename=`basename $f`
   install -p -D -m 644 heat_dashboard/enabled/${filename} %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/$(filename)
 done
+
+%if 0%{?rhosp} == 0
+  for f in %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/_16*.py*; do
+    filename=`basename $f`
+    ln -s %{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/${filename} \
+      %{buildroot}%{_sysconfdir}/openstack-dashboard/enabled/${filename}
+  done
+%endif
 
 # Remove .po and .pot (they are not required)
 rm -f %{buildroot}%{python3_sitelib}/heat_dashboard/locale/*/LC_*/django*.po
@@ -121,11 +131,11 @@ rm -f %{buildroot}%{python3_sitelib}/heat_dashboard/locale/*pot
 %license LICENSE
 %{python3_sitelib}/heat_dashboard
 %{python3_sitelib}/*.egg-info
-%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/_1610_project_orchestration_panel.py*
-%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/_1620_project_stacks_panel.py*
-%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/_1630_project_resource_types_panel.py*
-%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/_1640_project_template_versions_panel.py*
-%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/_1650_project_template_generator_panel.py*
+%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/_16*.py*
+
+%if 0%{?rhosp} == 0
+  %{_sysconfdir}/openstack-dashboard/enabled/_16*.py*
+%endif
 
 %if 0%{?with_doc}
 %files -n python3-%{openstack_name}-doc
