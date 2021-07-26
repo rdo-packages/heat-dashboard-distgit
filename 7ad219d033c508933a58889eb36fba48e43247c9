@@ -22,6 +22,30 @@
       "revId": "7ad219d033c508933a58889eb36fba48e43247c9",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "978deafb_8b08ea1f",
+        "filename": "openstack-heat-ui.spec",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 682
+      },
+      "writtenOn": "2021-07-26T08:05:48Z",
+      "side": 1,
+      "message": "The _1699_orchestration_settings.py file should be installed into the usual horizon config directory so I believe openstack-dashboard is correct here, iiuc.",
+      "parentUuid": "67621de2_376e2809",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 3
+      },
+      "revId": "7ad219d033c508933a58889eb36fba48e43247c9",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": true
     }
   ]
 }
