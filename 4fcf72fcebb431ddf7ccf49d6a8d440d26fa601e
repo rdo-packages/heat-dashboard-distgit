@@ -16,6 +16,23 @@
       "message": "recheck",
       "revId": "4fcf72fcebb431ddf7ccf49d6a8d440d26fa601e",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "335a6fb8_ce3bf9cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 635
+      },
+      "writtenOn": "2022-03-24T14:06:36Z",
+      "side": 1,
+      "message": "waiting for https://review.rdoproject.org/r/c/rdoinfo/+/40810 to be merged",
+      "revId": "4fcf72fcebb431ddf7ccf49d6a8d440d26fa601e",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ]
 }
