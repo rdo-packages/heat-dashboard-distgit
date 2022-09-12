@@ -51,7 +51,7 @@ Requires:       python3-XStatic-Angular-Vis
 Requires:       python3-XStatic-FileSaver
 Requires:       python3-XStatic-Json2yaml
 Requires:       python3-XStatic-JS-Yaml
-Requires:       python3-pbr >= 2.0.0
+Requires:       python3-pbr >= 5.5.0
 Requires:       python3-heatclient >= 1.10.0
 
 %description
