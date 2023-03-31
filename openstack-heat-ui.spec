@@ -1,4 +1,3 @@
-%global milestone .0rc1
 %{!?sources_gpg: %{!?dlrn:%global sources_gpg 1} }
 %global sources_gpg_sign 0xa7475c5f2122fec3f90343223fe3bf5aad1080e4
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
@@ -13,14 +12,12 @@
 
 Name:           openstack-%{openstack_name}
 Version:        9.0.0
-Release:        0.1%{?milestone}%{?dist}
+Release:        1%{?dist}
 Summary:        OpenStack Heat Dashboard for Horizon
 
 License:        ASL 2.0
 URL:            https://launchpad.net/heat-dashboard
 Source0:        https://tarballs.openstack.org/%{pypi_name}/%{pypi_name}-%{upstream_version}.tar.gz
-#
-# patches_base=9.0.0.0rc1
 #
 
 # Required for tarball sources verification
@@ -174,6 +171,9 @@ rm -f %{buildroot}%{python3_sitelib}/heat_dashboard/locale/*pot
 %endif
 
 %changelog
+* Fri Mar 31 2023 RDO <dev@lists.rdoproject.org> 9.0.0-1
+- Update to 9.0.0
+
 * Tue Mar 14 2023 RDO <dev@lists.rdoproject.org> 9.0.0-0.1.0rc1
 - Update to 9.0.0.0rc1
 
