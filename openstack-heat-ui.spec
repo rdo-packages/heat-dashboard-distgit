@@ -3,6 +3,7 @@
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 
 %global with_doc 1
+%global rhosp 0
 
 %global pypi_name heat-dashboard
 %global openstack_name heat-ui
