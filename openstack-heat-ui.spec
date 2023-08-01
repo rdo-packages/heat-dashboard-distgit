@@ -1,6 +1,12 @@
 %{!?sources_gpg: %{!?dlrn:%global sources_gpg 1} }
 %global sources_gpg_sign 0x2426b928085a020d8a90d0d879ab7008d0896c8a
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
+# we are excluding some BRs from automatic generator
+%global excluded_brs doc8 bandit pre-commit hacking flake8-import-order nodeenv xvfbwrapper
+# Exclude sphinx from BRs if docs are disabled
+%if ! 0%{?with_doc}
+%global excluded_brs %{excluded_brs} sphinx openstackdocstheme
+%endif
 
 %global with_doc 1
 %global rhosp 0
@@ -16,7 +22,7 @@ Version:        XXX
 Release:        XXX
 Summary:        OpenStack Heat Dashboard for Horizon
 
-License:        ASL 2.0
+License:        Apache-2.0
 URL:            https://launchpad.net/heat-dashboard
 Source0:        https://tarballs.openstack.org/%{pypi_name}/%{pypi_name}-%{upstream_version}.tar.gz
 # Required for tarball sources verification
@@ -34,27 +40,11 @@ BuildRequires:  /usr/bin/gpgv2
 
 BuildRequires:  git-core
 BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
-BuildRequires:  python3-testrepository
-BuildRequires:  python3-testscenarios
-BuildRequires:  python3-testtools
-BuildRequires:  python3-pbr
-BuildRequires:  python3-subunit
-BuildRequires:  python3-oslotest
+BuildRequires:  pyproject-rpm-macros
 BuildRequires:  openstack-macros
-# Required to compile i18n messages
-BuildRequires:  python3-django
 BuildRequires:  gettext
 
 Requires:       openstack-dashboard
-Requires:       python3-XStatic-Angular-UUID
-Requires:       python3-XStatic-Angular-Vis
-Requires:       python3-XStatic-FileSaver
-Requires:       python3-XStatic-Json2yaml
-Requires:       python3-XStatic-JS-Yaml
-Requires:       python3-pbr >= 5.5.0
-Requires:       python3-heatclient >= 1.10.0
-
 %description
 Heat Dashboard is an extension for OpenStack Dashboard that provides a UI
 for Heat.
@@ -63,9 +53,7 @@ for Heat.
 # Documentation package
 %package -n python3-%{openstack_name}-doc
 Summary:        Documentation for OpenStack Heat Dashboard for Horizon
-%{?python_provide:%python_provide python3-%{openstack_name}-doc}
-BuildRequires:  python3-openstackdocstheme
-BuildRequires:  python3-sphinx
+
 BuildRequires:  python3-sphinxcontrib-rsvgconverter
 
 %description -n python3-%{openstack_name}-doc
@@ -78,25 +66,49 @@ Documentation for Heat Dashboard
 %{gpgverify}  --keyring=%{SOURCE102} --signature=%{SOURCE101} --data=%{SOURCE0}
 %endif
 %autosetup -n %{pypi_name}-%{upstream_version} -S git
-# Let RPM handle the dependencies
-%py_req_cleanup
+
+sed -i "/^deps = -c{env:.*_CONSTRAINTS_FILE.*}/d" tox.ini
+sed -i "/-r{toxinidir}\/doc\/requirements.txt/ s/./deps = &/" tox.ini
+sed -i "/-r{toxinidir}\/requirements.txt/ s/./deps = &/" tox.ini
+
+sed -i '/\[testenv:docs\]deps/d' tox.ini
+sed -i /^minversion.*/d tox.ini
+sed -i /^requires.*virtualenv.*/d tox.ini
+
+# Exclude some bad-known BRs
+for pkg in %{excluded_brs}; do
+  for reqfile in doc/requirements.txt test-requirements.txt; do
+    if [ -f $reqfile ]; then
+      sed -i /^${pkg}.*/d $reqfile
+    fi
+  done
+done
+
+# Automatic BR generation
+%generate_buildrequires
+%if 0%{?with_doc}
+  %pyproject_buildrequires -t -e %{default_toxenv},docs
+%else
+  %pyproject_buildrequires -t -e %{default_toxenv}
+%endif
 
 %build
-%{py3_build}
-# Generate i18n files
-pushd build/lib/heat_dashboard
-django-admin compilemessages
-popd
+%pyproject_wheel
 
 %if 0%{?with_doc}
 # Build html documentation
-sphinx-build -W -b html doc/source doc/build/html
+%tox -e docs
 # Remove the sphinx-build-%{pyver} leftovers
 rm -rf doc/build/html/.{doctrees,buildinfo}
 %endif
 
 %install
-%{py3_install}
+%pyproject_install
+
+# Generate i18n files
+pushd %{buildroot}/%{python3_sitelib}/heat_dashboard
+django-admin compilemessages
+popd
 
 # Move config to horizon
 mkdir -p %{buildroot}%{_sysconfdir}/openstack-dashboard/enabled/
@@ -150,7 +162,7 @@ rm -f %{buildroot}%{python3_sitelib}/heat_dashboard/locale/*pot
 %doc README.rst
 %license LICENSE
 %{python3_sitelib}/heat_dashboard
-%{python3_sitelib}/*.egg-info
+%{python3_sitelib}/*.dist-info
 %{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/_16*.py*
 %{_datadir}/openstack-dashboard/openstack_dashboard/local/local_settings.d/_16*.py*
 %{_sysconfdir}/openstack-dashboard/heat_policy.yaml
