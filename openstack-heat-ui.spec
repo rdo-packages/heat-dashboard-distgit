@@ -1,4 +1,4 @@
-%global milestone .0rc1
+%global milestone .0rc2
 %{!?sources_gpg: %{!?dlrn:%global sources_gpg 1} }
 %global sources_gpg_sign 0x815AFEC729392386480E076DCC0DFE2D21C023C9
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
@@ -20,15 +20,13 @@
 
 Name:           openstack-%{openstack_name}
 Version:        10.0.0
-Release:        0.1%{?milestone}%{?dist}
+Release:        0.2%{?milestone}%{?dist}
 Summary:        OpenStack Heat Dashboard for Horizon
 
 License:        Apache-2.0
 URL:            https://launchpad.net/heat-dashboard
 Source0:        https://tarballs.openstack.org/%{pypi_name}/%{pypi_name}-%{upstream_version}.tar.gz
-#
-# patches_base=10.0.0.0rc1
-#
+# patches_base=10.0.0.0rc2
 
 # Required for tarball sources verification
 %if 0%{?sources_gpg} == 1
@@ -187,6 +185,9 @@ rm -f %{buildroot}%{python3_sitelib}/heat_dashboard/locale/*pot
 %endif
 
 %changelog
+* Thu Sep 28 2023 RDO <dev@lists.rdoproject.org> 10.0.0-0.2.0rc1
+- Update to 10.0.0.0rc2
+
 * Thu Sep 14 2023 RDO <dev@lists.rdoproject.org> 10.0.0-0.1.0rc1
 - Update to 10.0.0.0rc1
 
