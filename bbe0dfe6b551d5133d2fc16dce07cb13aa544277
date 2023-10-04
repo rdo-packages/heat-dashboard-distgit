@@ -1,0 +1,8 @@
+Code-Review+2: Joel Capitao <jcapitao@redhat.com>
+Verified+2: Zuul CI <zuul@review.rdoproject.org>
+Workflow+1: Joel Capitao <jcapitao@redhat.com>
+Submitted-by: Zuul CI <zuul@review.rdoproject.org>
+Submitted-at: Wed, 04 Oct 2023 12:12:58 +0000
+Reviewed-on: https://review.rdoproject.org/r/c/openstack/heat-dashboard-distgit/+/50289
+Project: openstack/heat-dashboard-distgit
+Branch: refs/heads/bobcat-rdo
