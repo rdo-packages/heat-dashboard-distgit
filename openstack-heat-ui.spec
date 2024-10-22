@@ -111,9 +111,7 @@ django-admin compilemessages
 popd
 
 # Move config to horizon
-mkdir -p %{buildroot}%{_sysconfdir}/openstack-dashboard/enabled/
 mkdir -p %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled
-mkdir -p %{buildroot}%{_sysconfdir}/openstack-dashboard/local_settings.d
 mkdir -p %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/local_settings.d
 mkdir -p %{buildroot}%{_sysconfdir}/openstack-dashboard/default_policies
 
