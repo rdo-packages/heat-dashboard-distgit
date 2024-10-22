@@ -1,5 +1,5 @@
 %{!?sources_gpg: %{!?dlrn:%global sources_gpg 1} }
-%global sources_gpg_sign 0x815AFEC729392386480E076DCC0DFE2D21C023C9
+%global sources_gpg_sign 0x815afec729392386480e076dcc0dfe2d21c023c9
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 # we are excluding some BRs from automatic generator
 %global excluded_brs doc8 bandit pre-commit hacking flake8-import-order nodeenv xvfbwrapper
@@ -19,7 +19,7 @@
 
 Name:           openstack-%{openstack_name}
 Version:        10.0.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        OpenStack Heat Dashboard for Horizon
 
 License:        Apache-2.0
@@ -114,7 +114,6 @@ popd
 # Move config to horizon
 mkdir -p %{buildroot}%{_sysconfdir}/openstack-dashboard/enabled/
 mkdir -p %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled
-mkdir -p %{buildroot}%{_sysconfdir}/openstack-dashboard/local_settings.d
 mkdir -p %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/local_settings.d
 mkdir -p %{buildroot}%{_sysconfdir}/openstack-dashboard/default_policies
 
@@ -135,14 +134,6 @@ for f in heat_dashboard/local_settings.d/_16*.py*; do
   filename=`basename $f`
   install -p -D -m 644 heat_dashboard/local_settings.d/${filename} %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/local_settings.d/${filename}
 done
-
-%if 0%{?rhosp} == 0
-  for f in %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/local_settings.d/_16*.py*; do
-    filename=`basename $f`
-    ln -s %{_datadir}/openstack-dashboard/openstack_dashboard/local/local_settings.d/${filename} \
-      %{buildroot}%{_sysconfdir}/openstack-dashboard/local_settings.d/${filename}
-  done
-%endif
 
 mv heat_dashboard/conf/heat_policy.yaml %{buildroot}%{_sysconfdir}/openstack-dashboard
 mv heat_dashboard/conf/default_policies/heat.yaml %{buildroot}%{_sysconfdir}/openstack-dashboard/default_policies/
@@ -173,7 +164,6 @@ rm -f %{buildroot}%{python3_sitelib}/heat_dashboard/locale/*pot
 
 %if 0%{?rhosp} == 0
   %{_sysconfdir}/openstack-dashboard/enabled/_16*.py*
-  %{_sysconfdir}/openstack-dashboard/local_settings.d/_16*.py*
 %endif
 
 %if 0%{?with_doc}
@@ -183,6 +173,9 @@ rm -f %{buildroot}%{python3_sitelib}/heat_dashboard/locale/*pot
 %endif
 
 %changelog
+* Fri Nov 15 2024 Joel Capitao <jcapitao@redhat.com> 10.0.0-2
+- Let local settings files into data directory
+
 * Wed Oct 04 2023 RDO <dev@lists.rdoproject.org> 10.0.0-1
 - Update to 10.0.0
 
