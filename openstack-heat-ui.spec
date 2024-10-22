@@ -113,7 +113,6 @@ popd
 # Move config to horizon
 mkdir -p %{buildroot}%{_sysconfdir}/openstack-dashboard/enabled/
 mkdir -p %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled
-mkdir -p %{buildroot}%{_sysconfdir}/openstack-dashboard/local_settings.d
 mkdir -p %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/local_settings.d
 mkdir -p %{buildroot}%{_sysconfdir}/openstack-dashboard/default_policies
 
@@ -134,14 +133,6 @@ for f in heat_dashboard/local_settings.d/_16*.py*; do
   filename=`basename $f`
   install -p -D -m 644 heat_dashboard/local_settings.d/${filename} %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/local_settings.d/${filename}
 done
-
-%if 0%{?rhosp} == 0
-  for f in %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/local_settings.d/_16*.py*; do
-    filename=`basename $f`
-    ln -s %{_datadir}/openstack-dashboard/openstack_dashboard/local/local_settings.d/${filename} \
-      %{buildroot}%{_sysconfdir}/openstack-dashboard/local_settings.d/${filename}
-  done
-%endif
 
 mv heat_dashboard/conf/heat_policy.yaml %{buildroot}%{_sysconfdir}/openstack-dashboard
 mv heat_dashboard/conf/default_policies/heat.yaml %{buildroot}%{_sysconfdir}/openstack-dashboard/default_policies/
@@ -172,7 +163,6 @@ rm -f %{buildroot}%{python3_sitelib}/heat_dashboard/locale/*pot
 
 %if 0%{?rhosp} == 0
   %{_sysconfdir}/openstack-dashboard/enabled/_16*.py*
-  %{_sysconfdir}/openstack-dashboard/local_settings.d/_16*.py*
 %endif
 
 %if 0%{?with_doc}
