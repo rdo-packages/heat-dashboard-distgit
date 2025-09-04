@@ -174,3 +174,4 @@ rm -f %{buildroot}%{python3_sitelib}/heat_dashboard/locale/*pot
 %endif
 
 %changelog
+# REMOVEME: error caused by commit https://opendev.org/openstack/heat-dashboard/commit/b6147482b3fa2c3edad39cd4631d4a4c34460349
